@@ -8,9 +8,8 @@
     </main>
     <span slot="footer">
       ©2019. Made by&nbsp;
-      <a href="https://reelmotion.games" target="_blank">ReelMotionGames</a>
+      <a href="https://github.com/disheshub" target="_blank">Boys</a>
     </span>
-    <div class="h5" style="position:fixed; left:15px; bottom:0px; z-index:5000">Build: {{ build }}</div>
   </vuestic-layout>
 </template>
 
