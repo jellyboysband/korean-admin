@@ -1,18 +1,12 @@
 <template>
   <div class="profile-dropdown flex-center">
     <span class="profile-dropdown__profile-name">
-      <slot name="profile-name-text"/>
+      <slot name="profile-name-text" />
     </span>
     <span class="profile-dropdown__avatar-container">
-      <slot name="avatar-img"/>
+      <slot name="avatar-img" />
     </span>
     <vuestic-dropdown v-model="isShown" position="bottom">
-      <div class="dropdown-item plain-link-item">
-        <router-link
-          :to="{name : 'admin__personal-settings'}"
-          class="plain-link"
-        > Settings</router-link>
-      </div>
       <div class="dropdown-item plain-link-item">
         <a @click="logoutHandler" class="plain-link">{{ $t(`user.logout`) }}</a>
       </div>

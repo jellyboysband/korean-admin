@@ -31,15 +31,17 @@
     "jackpots": "Jackpots",
     "adminLogs": "Admin Logs",
     "userLogs": "User Logs",
-    "security": "Security"
+    "security": "Security",
+    "brands": "Brands",
+    "products": "Products"
   },
-  "dashboard" : {
-    "info" : "Info",
-    "cashbox" : "CashBox"
+  "dashboard": {
+    "info": "Info",
+    "cashbox": "CashBox"
   },
   "operator__hall": {
-    "cashIn" : "Cash in",
-    "cashOut" : "Cash out"
+    "cashIn": "Cash in",
+    "cashOut": "Cash out"
   },
   "admin": {
     "admin": "Admin",

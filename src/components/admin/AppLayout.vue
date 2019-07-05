@@ -1,24 +1,17 @@
 <template>
   <vuestic-layout v-layout>
-    <app-navbar :isOpen="navbarOpened" @toggle-menu="toggleNavbar"/>
-    <app-sidebar :isOpen="sidebarOpened" @toggle-menu="toggleSidebar"/>
-    <main
-      slot="content"
-      id="content"
-      class="content va-layout gutter--lg fluid"
-      role="main"
-    >
-      <app-breadcrumbs/>
-      <router-view/>
+    <app-navbar :isOpen="navbarOpened" @toggle-menu="toggleNavbar" />
+    <app-sidebar :isOpen="sidebarOpened" @toggle-menu="toggleSidebar" />
+    <main slot="content" id="content" class="content va-layout gutter--lg fluid" role="main">
+      <!-- <app-breadcrumbs/> -->
+      <router-view />
     </main>
     <span slot="footer">
-      ©2019. Made by&nbsp;<a href="https://reelmotion.games" target="_blank"> ReelMotionGames</a>
+      ©2019. Made by&nbsp;
+      <a href="https://reelmotion.games" target="_blank">ReelMotionGames</a>
     </span>
-    <div class="h5" style="position:fixed; left:15px; bottom:0px; z-index:5000">
-      Build: {{ build }}
-    </div>
+    <div class="h5" style="position:fixed; left:15px; bottom:0px; z-index:5000">Build: {{ build }}</div>
   </vuestic-layout>
-
 </template>
 
 <script>
