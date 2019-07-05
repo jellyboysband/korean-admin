@@ -1,0 +1,35 @@
+@import "./fontawesome/fontawesome.scss";
+@import "./fontawesome/solid";
+@import "../vuestic-theme/vuestic-sass/vuestic-styles";
+@import "checkbox";
+
+.clickable {
+  cursor: pointer;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .nav-pills {
+    flex-direction: column;
+
+    & + .track {
+      display: none;
+    }
+  }
+}
+
+table .td {
+  text-align: center;
+}
+
+.player-icon {
+  font-size: 28px;
+}
+
+.info-table { 
+  border : 2px solid 
+}

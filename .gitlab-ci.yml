@@ -1,0 +1,12 @@
+image: node:10
+
+build:
+  before_script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$QA_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh $QA_USER@$QA_SERVER ansible-playbook /home/deploy/build.yml -e branch=$CI_COMMIT_REF_NAME -e build=$CI_PIPELINE_ID --tags=ce-admin
+  only:
+    - qa

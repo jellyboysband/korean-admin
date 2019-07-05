@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+  src: url('vuestic-theme/vuestic-sass/icons/icon-fonts/fontello/fontello.eot');
+  src: url('vuestic-theme/vuestic-sass/icons/icon-fonts/fontello/fontello.eot?#iefix') format('eot'),
+    url('vuestic-theme/vuestic-sass/icons/icon-fonts/fontello/fontello.woff') format('woff'),
+    url('vuestic-theme/vuestic-sass/icons/icon-fonts/fontello/fontello.ttf') format('truetype'),
+    url('vuestic-theme/vuestic-sass/icons/icon-fonts/fontello/fontello.svg#fontello') format('svg');
+}
+
+[class*='fontello-']:before {
+  font-family: 'fontello', sans-serif;
+  font-style: normal;
+}
+
+.fontello-halls:before {
+  content: '\e800';
+}
+
+.fontello-vgms:before {
+  content: '\e803';
+}
+
+.fontello-slots:before {
+  content: '\e801';
+}
+
+.fontello-slots2:before {
+  content: '\e802';
+}

@@ -1,0 +1,113 @@
+{
+  "name": "vuestic-admin",
+  "version": "1.9.0",
+  "description": "ReelMotion Admin",
+  "private": false,
+  "scripts": {
+    "serve:admin": "vue-cli-service serve src/admin/index.js --port 3020",
+    "serve:operator": "vue-cli-service serve src/operator/index.js --port 8081",
+    "build:admin": "vue-cli-service build --dest dist/admin src/admin/index.js",
+    "build:operator": "vue-cli-service build --dest dist/operator src/operator/index.js",
+    "build": "npm run build:admin",
+    "lint": "vue-cli-service lint",
+    "inspect": "vue-cli-service inspect > inspect.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epicmaxco/vuestic-admin.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@sentry/browser": "^5.2.0",
+    "@sentry/integrations": "^5.2.0",
+    "@statnett/vue-plotly": "^0.2.0",
+    "axios": "^0.18.0",
+    "babel-plugin-prismjs": "^1.0.2",
+    "babel-polyfill": "^6.26.0",
+    "bootstrap": "^4.0.0",
+    "chart.js": "^2.8.0",
+    "detect-browser": "^3.0.0",
+    "dotenv": "^6.2.0",
+    "element-resize-detector": "^1.1.12",
+    "epic-spinners": "^1.0.4",
+    "es6-promise": "^4.2.5",
+    "extend": "3.0.2",
+    "flag-icon-css": "^3.0.0",
+    "font-awesome": "^4.7.0",
+    "ionicons": "^3.0.0",
+    "kewler": "^1.0.8",
+    "lodash": "^4.17.11",
+    "medium-editor": "^5.23.3",
+    "normalize.css": "8.0.0",
+    "plotly.js": "^1.47.1",
+    "prismjs": "^1.16.0",
+    "v-tooltip": "^2.0.0-rc.30",
+    "vee-validate": "2.0.9",
+    "vue": "^2.6.10",
+    "vue-book": "0.1.0-alpha.9",
+    "vue-bulma-expanding": "0.0.1",
+    "vue-chartjs": "^3.4.2",
+    "vue-clipboard2": "^0.3.0",
+    "vue-color": "^2.7.0",
+    "vue-prism-component": "^1.1.1",
+    "vue-progressbar": "^0.7.5",
+    "vue-router": "^3.0.1",
+    "vue-select": "^2.5.1",
+    "vue-slider-component": "2.7.8",
+    "vue-textarea-autosize": "^1.0.4",
+    "vue-toasted": "^1.1.26",
+    "vue-yandex-maps": "^0.7.9",
+    "vue2-circle-progress": "^1.0.3",
+    "vue2-filters": "^0.6.0",
+    "vuejs-datepicker": "^1.6.2",
+    "vuetable-2": "1.7.5",
+    "vuex": "^3.0.1",
+    "vuex-i18n": "^1.7.0",
+    "vuex-store": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.5",
+    "@vue/cli-plugin-eslint": "^3.0.5",
+    "@vue/cli-service": "^3.0.5",
+    "@vue/eslint-config-standard": "^3.0.5",
+    "autoprefixer": "9.1.5",
+    "chalk": "2.4.1",
+    "connect-history-api-fallback": "1.5.0",
+    "copy-webpack-plugin": "4.5.3",
+    "eslint-friendly-formatter": "4.0.1",
+    "eventsource-polyfill": "0.9.6",
+    "express": "^4.16.3",
+    "extract-text-webpack-plugin": "3.0.2",
+    "file-loader": "2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "lint-staged": "^7.2.0",
+    "node-sass": "^4.9.0",
+    "opn": "5.4.0",
+    "optimize-css-assets-webpack-plugin": "5.0.1",
+    "ora": "3.0.0",
+    "portfinder": "1.0.17",
+    "sass-loader": "^7.0.1",
+    "sass-resources-loader": "^1.3.3",
+    "semver": "5.5.1",
+    "shelljs": "0.8.2",
+    "vue-flatpickr-component": "^8.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}

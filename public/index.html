@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <script>
+      window.env = {
+        API_URL: '<%= process.env.VUE_APP_API_URL %>',
+        PLAY_URL: '<%= process.env.VUE_APP_PLAY_URL %>',
+        BUILD: '<%= process.env.VUE_APP_BUILD %>',
+        IMAGE_HOST: '<%= process.env.VUE_APP_IMAGE_HOST %>',
+        SENTRY_DSN: '<%= process.env.VUE_APP_SENTRY_DSN %>',
+        SECURITY_WS_URL: '<%= process.env.VUE_APP_SECURITY_WS_URL %>'
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
