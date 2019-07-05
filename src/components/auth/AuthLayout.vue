@@ -2,20 +2,18 @@
   <div class="auth-layout">
     <div class="nav d-lg-none">
       <router-link :to="{path: '/'}">
-        <vuestic-icon-vuestic/>
+        <vuestic-icon-vuestic />
       </router-link>
     </div>
     <div class="main va-row">
       <div class="auth-content flex lg6 xs12 fill-height">
         <div class="flex-center">
-          <router-view/>
+          <router-view />
         </div>
       </div>
       <div class="auth-layout__auth-wallpaper flex md6">
         <div class="flex-center">
-          <router-link class="auth-layout__auth-wallpaper__logo" :to="{path: '/'}">
-
-          </router-link>
+          <router-link class="auth-layout__auth-wallpaper__logo" :to="{path: '/'}"></router-link>
         </div>
       </div>
     </div>
@@ -40,7 +38,7 @@ export default {
   &__auth-wallpaper {
     position: relative;
     background-color: $top-nav-bg;
-    background-image:  url('../../assets/images/preloader_logo.png'), url('../../assets/images/preloader_bg.jpg');
+    background-image: url("../../assets/images/preloader_bg.jpg");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
