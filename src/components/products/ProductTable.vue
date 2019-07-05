@@ -3,13 +3,12 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Brand</th>
-        <th>Description</th>
-        <th>Apply</th>
-        <th>Price</th>
-        <!-- <th>Url</th> -->
-        <th>delete?</th>
+        <th>{{ $t('product.name') }}</th>
+        <th>{{ $t('product.brand') }}</th>
+        <th>{{ $t('product.description') }}</th>
+        <th>{{ $t('product.apply') }}</th>
+        <th>{{ $t('product.price') }}</th>
+        <th>{{ $t('product.delete') }}?</th>
       </tr>
     </thead>
     <tbody data-qa="products-table">

@@ -7,7 +7,7 @@
             :to="{name:'admin__brand.create'}"
             class="btn btn-micro btn-primary"
             :data-qa="`widgetButton-Create`"
-          >Create</router-link>
+          >{{$t('create')}}</router-link>
         </template>
         <!-- <brand-filters :startFilter="this.filter" @change="handleFilterChange"></brand-filters> -->
         <brand-list :filter="this.filter"></brand-list>

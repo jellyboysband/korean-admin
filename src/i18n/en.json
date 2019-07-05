@@ -6,304 +6,40 @@
     "createNewAccount": "Create account",
     "email": "Email",
     "login": "Login",
+    "logIn": "Login",
     "password": "Password",
     "signUp": "Sign Up",
     "termsOfUse": "Terms of Use.",
     "welcome": "Welcome!"
   },
-  "breadcrumbs": {
-    "home": "Home"
-  },
   "menu": {
-    "auth": "Auth",
-    "dashboard": "Dashboard",
-    "login": "Login",
-    "users": "Users",
-    "groups": "Groups",
-    "admins": "Admins",
-    "halls": "Halls",
-    "vgms": "VGM's",
-    "slots": "Slots",
-    "reels": "Reels",
-    "configs": "Configs",
-    "games": "Games",
-    "invoices": "Finance",
-    "jackpots": "Jackpots",
-    "adminLogs": "Admin Logs",
-    "userLogs": "User Logs",
-    "security": "Security",
     "brands": "Brands",
-    "products": "Products"
+    "products": "Products",
+    "confirm": "Are you sure you want to remove brand"
   },
   "brand": {
     "brands": "Brands",
-    "create": "Create brand"
+    "create": "Create brand",
+    "confirm": "Are you sure you want to remove brand",
+    "empty": "There is no brands!",
+    "name": "Name",
+    "delete": "Delete"
   },
   "product": {
     "products": "Products",
-    "create": "Create product"
-  },
-  "dashboard": {
-    "info": "Info",
-    "cashbox": "CashBox"
-  },
-  "operator__hall": {
-    "cashIn": "Cash in",
-    "cashOut": "Cash out"
-  },
-  "admin": {
-    "admin": "Admin",
-    "admins": "Admin List",
-    "edit": "Edit",
-    "profile": "Profile",
-    "logs": "Logs",
-    "info": "Info",
-    "admin-name": "Admin name",
-    "create": "Create Admin"
-  },
-  "admin__admin": {
-    "admin": "Admin",
-    "admins": "Admin List",
-    "edit": "Edit",
-    "profile": "Profile",
-    "logs": "Logs",
-    "info": "Info",
-    "admin-name": "Admin name",
-    "create": "Create Admin"
-  },
-  "security": {
-    "security": "Security",
-    "info": "Info",
-    "adminlogs": "Admin Logs",
-    "userlogs": "User Logs",
-    "riskcontrol": "Risk Control"
-  },
-  "admin__security": {
-    "security": "Security",
-    "info": "Info",
-    "adminlogs": "Admin Logs",
-    "userlogs": "User Logs",
-    "riskcontrol": "Risk Control"
-  },
-  "operator__security": {
-    "security": "Security",
-    "info": "Info",
-    "adminlogs": "Admin Logs",
-    "userlogs": "User Logs",
-    "riskcontrol": "Risk Control"
-  },
-  "group": {
-    "group": "Group",
-    "groups": "Group List",
-    "info": "Info",
-    "edit": "Edit",
-    "create": "Create Group"
-  },
-  "hall": {
-    "hall": "Hall",
-    "halls": "Hall List",
-    "create": "Create Hall",
-    "info": "Info",
-    "edit": "Edit"
-  },
-  "admin__hall": {
-    "hall": "Hall",
-    "halls": "Hall List",
-    "create": "Create Hall",
-    "info": "Info",
-    "edit": "Edit"
-  },
-  "slot": {
-    "slots": "Slot List",
-    "slot": "Slot",
-    "edit": "Edit",
-    "info": "Info",
-    "create": "Create Slot",
-    "stats": "Stats",
-    "logs": "Logs",
-    "sessions": "Sessions"
-  },
-  "admin__slot": {
-    "slots": "Slot List",
-    "slot": "Slot",
-    "edit": "Edit",
-    "info": "Info",
-    "create": "Create Slot",
-    "stats": "Stats",
-    "logs": "Logs",
-    "sessions": "Sessions"
-  },
-  "session": {
-    "session": "Session",
-    "stats": "Stats",
-    "logs": "Logs",
-    "info": "Info"
-  },
-  "admin__session": {
-    "session": "Session",
-    "stats": "Stats",
-    "logs": "Logs",
-    "info": "Info"
-  },
-  "operator__session": {
-    "session": "Session",
-    "stats": "Stats",
-    "logs": "Logs",
-    "info": "Info"
-  },
-  "reel": {
-    "reels": "Reel List",
-    "title": "title",
-    "game": "Game",
-    "create": "Reel Create",
-    "description": "description",
-    "createdAt": "createdAt",
-    "edit": "Edit",
-    "info": "Info",
-    "page": "Reel Page"
-  },
-  "invoice": {
-    "invoices": "Invoice List",
-    "info": "Info",
-    "stats": "Stats",
-    "invoice": "Invoice"
-  },
-  "admin__invoice": {
-    "invoices": "Invoice List",
-    "info": "Info",
-    "stats": "Stats",
-    "invoice": "Invoice"
-  },
-  "operator__invoice": {
-    "invoices": "Invoice List",
-    "info": "Info",
-    "stats": "Stats",
-    "invoice": "Invoice"
-  },
-  "config": {
-    "configs": "Config List",
-    "config": "Config",
-    "game": "Game",
-    "title": "Title",
-    "gameId": "Game ID",
+    "create": "Create product",
+    "confirm": "Are you sure you want to remove product",
+    "empty": "There is no products!",
+    "name": "Name",
+    "delete": "Delete",
+    "brand": "Brand",
     "description": "Description",
-    "create": "Create Config",
-    "info": "Info",
-    "edit": "Edit"
+    "apply": "Apply",
+    "price": "Price"
   },
-  "admin__config": {
-    "configs": "Config List",
-    "config": "Config",
-    "game": "Game",
-    "title": "Title",
-    "gameId": "Game ID",
-    "description": "Description",
-    "create": "Create Config",
-    "info": "Info",
-    "edit": "Edit"
-  },
-  "vgm": {
-    "vgm": "VGM",
-    "vgms": "VGM List",
-    "create": "Create VGM",
-    "info": "Info",
-    "edit": "Edit",
-    "stats": "Stats",
-    "slots": "Slots"
-  },
-  "admin__vgm": {
-    "vgm": "VGM",
-    "vgms": "VGM List",
-    "create": "Create VGM",
-    "info": "Info",
-    "edit": "Edit",
-    "cashIn": "Cash IN",
-    "cashOut": "Cash OUT",
-    "stats": "Stats",
-    "slots": "Slots",
-    "sessions": "Sessions",
-    "invoices": "Invoices"
-  },
-  "operator__vgm": {
-    "vgm": "VGM",
-    "vgms": "VGM List",
-    "create": "Create VGM",
-    "info": "Info",
-    "stats": "Stats",
-    "slots": "Slots",
-    "users": "User List",
-    "user": "User Page",
-    "cashIn": "Cash IN",
-    "cashOut": "Cash OUT",
-    "profile": "Profile",
-    "sessions": "Sessions",
-    "invoices": "Invoices",
-    "logs": "Logs",
-    "language": "Change Language",
-    "logout": "Logout"
-  },
-  "game": {
-    "title": "Title",
-    "games": "Game List",
-    "vendor": "Vendor",
-    "info": "Info",
-    "create": "Create Game",
-    "page": "Game Page"
-  },
-  "admin__game": {
-    "title": "Title",
-    "games": "Game List",
-    "vendor": "Vendor",
-    "info": "Info",
-    "create": "Create Game",
-    "page": "Game Page"
-  },
+  "submit": "Submit",
+  "create": "Create",
   "user": {
-    "users": "User List",
-    "user": "User Page",
-    "create": "Create User",
-    "cashIn": "Cash IN",
-    "cashOut": "Cash OUT",
-    "profile": "Profile",
-    "edit": "Edit",
-    "sessions": "Sessions",
-    "invoices": "Invoices",
-    "logs": "Logs",
-    "language": "Change Language",
     "logout": "Logout"
-  },
-  "admin__user": {
-    "users": "User List",
-    "user": "User Page",
-    "create": "Create User",
-    "cashIn": "Cash IN",
-    "cashOut": "Cash OUT",
-    "profile": "Profile",
-    "edit": "Edit",
-    "sessions": "Sessions",
-    "invoices": "Invoices",
-    "logs": "Logs",
-    "language": "Change Language",
-    "logout": "Logout"
-  },
-  "operator__user": {
-    "users": "User List",
-    "user": "User Page",
-    "create": "Create User",
-    "cashIn": "Cash IN",
-    "cashOut": "Cash OUT",
-    "profile": "Profile",
-    "edit": "Edit",
-    "sessions": "Sessions",
-    "invoices": "Invoices",
-    "logs": "Logs",
-    "language": "Change Language",
-    "logout": "Logout"
-  },
-  "userLog": {
-    "userLogs": "User Logs"
-  },
-  "adminLog": {
-    "adminLogs": "Admin Logs"
   }
 }

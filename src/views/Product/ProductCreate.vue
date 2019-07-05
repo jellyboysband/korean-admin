@@ -16,7 +16,7 @@
                       required
                       data-qa="products-name"
                     />
-                    <label class="control-label" for="productName">Name</label>
+                    <label class="control-label" for="productName">{{ $t('product.name') }}</label>
                     <i class="bar"></i>
                   </div>
                 </div>
@@ -29,7 +29,10 @@
                       required
                       data-qa="products-description"
                     />
-                    <label class="control-label" for="productDescription">Description</label>
+                    <label
+                      class="control-label"
+                      for="productDescription"
+                    >{{ $t('product.description') }}</label>
                     <i class="bar"></i>
                   </div>
                 </div>
@@ -42,7 +45,7 @@
                       required
                       data-qa="products-apply"
                     />
-                    <label class="control-label" for="productApply">Apply</label>
+                    <label class="control-label" for="productApply">{{ $t('product.apply') }}</label>
                     <i class="bar"></i>
                   </div>
                 </div>
@@ -55,7 +58,7 @@
                       required
                       data-qa="products-price"
                     />
-                    <label class="control-label" for="productPrice">Price</label>
+                    <label class="control-label" for="productPrice">{{ $t('product.price') }}</label>
                     <i class="bar"></i>
                   </div>
                 </div>
@@ -65,7 +68,7 @@
                     <v-select
                       v-if="selectOptions.brands"
                       label="name"
-                      :data-label="'brand'"
+                      :data-label=" $t('product.brand')"
                       :class="fields.brand ? 'selected' : ''"
                       :options="selectOptions.brands"
                       v-model="fields.brand"
@@ -73,13 +76,17 @@
                       required
                       data-qa="product-brand"
                     />
-                    <p v-else>!!There is no product!!</p>
+                    <p v-else>{{ $t('product.empty') }}</p>
                   </div>
                 </div>
               </fieldset>
             </div>
           </div>
-          <button class="btn btn-primary" :disabled="!isReadyToSubmit" type="submit">Submit</button>
+          <button
+            class="btn btn-primary"
+            :disabled="!isReadyToSubmit"
+            type="submit"
+          >{{ $t('submit') }}</button>
         </form>
       </vuestic-widget>
     </div>

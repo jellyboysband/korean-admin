@@ -16,14 +16,18 @@
                       required
                       data-qa="brands-name"
                     />
-                    <label class="control-label" for="brandName">Name</label>
+                    <label class="control-label" for="brandName">{{ $t('brand.name') }}</label>
                     <i class="bar"></i>
                   </div>
                 </div>
               </fieldset>
             </div>
           </div>
-          <button class="btn btn-primary" :disabled="!isReadyToSubmit" type="submit">Submit</button>
+          <button
+            class="btn btn-primary"
+            :disabled="!isReadyToSubmit"
+            type="submit"
+          >{{ $t('submit') }}</button>
         </form>
       </vuestic-widget>
     </div>

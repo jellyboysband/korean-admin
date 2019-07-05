@@ -3,8 +3,8 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>delete?</th>
+        <th>{{ $t('brand.name') }}</th>
+        <th>{{ $t('brand.delete') }}?</th>
       </tr>
     </thead>
     <tbody data-qa="brands-table">

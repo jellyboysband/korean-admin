@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="d-flex align--center justify--space-between">
-        <button class="btn btn-primary" type="submit">{{ $t('auth.login') }}</button>
+        <button class="btn btn-primary" type="submit">{{ $t('auth.logIn') }}</button>
       </div>
     </form>
   </div>
