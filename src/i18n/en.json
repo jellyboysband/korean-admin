@@ -35,6 +35,14 @@
     "brands": "Brands",
     "products": "Products"
   },
+  "brand": {
+    "brands": "Brands",
+    "create": "Create brand"
+  },
+  "product": {
+    "products": "Products",
+    "create": "Create product"
+  },
   "dashboard": {
     "info": "Info",
     "cashbox": "CashBox"

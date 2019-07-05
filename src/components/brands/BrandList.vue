@@ -2,7 +2,7 @@
   <div class="row justify-content-center" v-if="brandList.length">
     <brand-table :brandList="brandList" @deleteOrRestore="deleteOrRestore"></brand-table>
     <vuestic-modal ref="largeModal" :large="true" @ok="ok" @cancel="cancel">
-      <p>Are you sure you want to restore' remove brand {{ brand.name }}?</p>
+      <p>Are you sure you want to remove brand {{ brand.name }}?</p>
     </vuestic-modal>
   </div>
   <div v-else>
