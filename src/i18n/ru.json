@@ -35,11 +35,16 @@
     "brand": "Бренд",
     "description": "Описание",
     "apply": "Apply",
-    "price": "Цена"
+    "price": "Цена",
+    "image": "Картинка"
   },
   "submit": "Отправить",
   "create": "Создать",
   "user": {
     "logout": "Выйти"
+  },
+  "fileUpload": {
+    "dragNdropFiles": "Просто перетащите",
+    "uploadFile": "Загрузить"
   }
 }

@@ -114,7 +114,7 @@ Vue.prototype.$http.defaults.headers.post['Content-Type'] = 'application/json';
 const token = localStorage.getItem('token');
 
 if (token) {
-  Vue.prototype.$http.defaults.headers.common['token'] = token;
+  Vue.prototype.$http.defaults.headers.common['AdminCookie'] = token;
 }
 
 // Router settings

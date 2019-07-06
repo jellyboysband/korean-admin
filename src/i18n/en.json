@@ -35,11 +35,16 @@
     "brand": "Brand",
     "description": "Description",
     "apply": "Apply",
-    "price": "Price"
+    "price": "Price",
+    "image": "Image"
   },
   "submit": "Submit",
   "create": "Create",
   "user": {
     "logout": "Logout"
+  },
+  "fileUpload": {
+    "dragNdropFiles": "dragNdrop",
+    "uploadFile": "Upload"
   }
 }

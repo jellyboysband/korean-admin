@@ -5,6 +5,7 @@ import Switch from './vuestic-components/vuestic-switch/VuesticSwitch.vue';
 import SimpleSelect from './vuestic-components/vuestic-simple-select/VuesticSimpleSelect.vue';
 import Tabs from './vuestic-components/vuestic-tabs/VuesticTabs.vue';
 import Widget from './vuestic-components/vuestic-widget/VuesticWidget.vue';
+import FileUpload from './vuestic-components/vuestic-file-upload/VuesticFileUpload';
 
 import VuesticDropdown from './vuestic-components/vuestic-dropdown/VuesticDropdown';
 import { installQuasarPlatform } from './vuestic-components/vuestic-popup/quasar/install';
@@ -15,16 +16,7 @@ installQuasarPlatform();
 
 const VuesticPlugin = {
   install(Vue, options) {
-    [
-      Breadcrumbs,
-      Modal,
-      Scrollbar,
-      Switch,
-      SimpleSelect,
-      Tabs,
-      Widget,
-      VuesticDropdown
-    ].forEach(component => {
+    [Breadcrumbs, FileUpload, Modal, Scrollbar, Switch, SimpleSelect, Tabs, Widget, VuesticDropdown].forEach(component => {
       Vue.component(component.name, component);
     });
   }

@@ -1,9 +1,17 @@
 import axios from 'axios';
+
+import UploadService from './UploadService';
 class ProductService {
-  static createProduct(data) {
-    return axios.post(`${window.env.API_URL}/product`, data).then(response => response.data);
+  static createProduct({ photo, ...data }) {
+    return axios.post(`${window.env.API_URL}/product`, data).then(response => {
+      if (photo) {
+        return UploadService.send(response.data.id, { file: photo }).then(it => response.data);
+      } else {
+        return response.data;
+      }
+    });
   }
-  static getProductList({ limit = 10000, offset = 0, ...params }) {
+  static getProductList({ limit = 1000, offset = 0, ...params }) {
     return axios.get(`${window.env.API_URL}/products`, { params: { limit, offset, ...params } }).then(response => response.data);
   }
   static getProductById(id) {

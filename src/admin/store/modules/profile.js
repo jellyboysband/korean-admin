@@ -2,7 +2,8 @@ import Axios from 'axios';
 
 const state = {
   status: '',
-  id: ''
+  id: '',
+  username: ''
 };
 
 const mutations = {
@@ -13,6 +14,7 @@ const mutations = {
   profile_success(state, profile) {
     state.status = 'success';
     state.id = profile.id;
+    state.username = profile.username;
   },
 
   profile_error(state) {
@@ -22,6 +24,7 @@ const mutations = {
   logout(state) {
     state.status = '';
     state.id = '';
+    state.username = '';
   }
 };
 
@@ -29,12 +32,11 @@ const actions = {
   profile({ commit }) {
     return new Promise((resolve, reject) => {
       commit('profile_request');
-      // FIXME: костыль ебаный
       Axios({
         url: `${window.env.API_URL}/products`,
         method: 'GET'
       }).then(response => {
-        const profile = { id: 1 };
+        const profile = { id: 1, username: response.username };
         commit('profile_success', profile);
         resolve(response);
       });
