@@ -33,7 +33,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit('auth_request');
       Axios.post(
-        `${window.env.API_URL}/login`,
+        `${window.env.API_URL}/api/login`,
         {
           username,
           password
@@ -61,15 +61,15 @@ const actions = {
   logout({ commit }) {
     return new Promise((resolve, reject) => {
       commit('logout');
-
-      Axios.delete(`${window.env.API_URL}/login`)
-        .then(response => {
-          resolve(response);
-        })
-        .catch(err => {
-          delete Axios.defaults.headers.common['token'];
-          resolve(err);
-        });
+      resolve('');
+      // Axios.delete(`${window.env.API_URL}/api/login`)
+      //   .then(response => {
+      //     resolve(response);
+      //   })
+      //   .catch(err => {
+      //     delete Axios.defaults.headers.common['AdminCookie'];
+      //     resolve(err);
+      //   });
     });
   }
 };

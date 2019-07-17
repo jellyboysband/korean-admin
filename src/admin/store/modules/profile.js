@@ -33,7 +33,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit('profile_request');
       Axios({
-        url: `${window.env.API_URL}/products`,
+        url: `${window.env.API_URL}/api/products`,
         method: 'GET'
       }).then(response => {
         const profile = { id: 1, username: response.username };

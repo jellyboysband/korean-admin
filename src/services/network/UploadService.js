@@ -4,7 +4,7 @@ class UploadService {
     const data = new FormData();
     data.append('file', file);
     const options = { headers: { 'Content-Type': 'multipart/form-data' } };
-    return axios.put(`${window.env.API_URL}/avatar/${id}`, data, options).then(response => response.data);
+    return axios.put(`${window.env.API_URL}/api/avatar/${id}`, data, options).then(response => response.data);
   }
 }
 
