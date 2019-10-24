@@ -16,7 +16,7 @@ import BrandService from 'services/network/BrandService';
 
 export default {
   components: {
-    BrandTable,
+    BrandTable
   },
   props: {
     filter: Object
@@ -27,7 +27,7 @@ export default {
   methods: {
     getBrands() {
       BrandService.getBrandList().then(response => {
-        this.brandList = response;
+        this.brandList = response.list;
       });
     },
 
@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       brandList: [],
-      brand: {},
+      brand: {}
     };
   }
 };

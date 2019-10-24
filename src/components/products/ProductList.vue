@@ -16,7 +16,7 @@ import ProductService from 'services/network/ProductService';
 
 export default {
   components: {
-    ProductTable,
+    ProductTable
   },
   props: {
     filter: Object
@@ -27,7 +27,7 @@ export default {
   methods: {
     getProducts() {
       ProductService.getProductList({}).then(response => {
-        this.productList = response;
+        this.productList = response.list;
       });
     },
 
@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       productList: [],
-      product: {},
+      product: {}
     };
   }
 };

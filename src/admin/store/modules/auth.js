@@ -33,7 +33,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit('auth_request');
       Axios.post(
-        `${window.env.API_URL}/api/login`,
+        `${window.env.API_URL}/api/admin/login`,
         {
           username,
           password

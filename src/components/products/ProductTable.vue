@@ -8,18 +8,25 @@
         <th>{{ $t('product.description') }}</th>
         <th>{{ $t('product.apply') }}</th>
         <th>{{ $t('product.price') }}</th>
+        <th>{{ $t('product.tags') }}</th>
         <th>{{ $t('product.delete') }}?</th>
       </tr>
     </thead>
     <tbody data-qa="products-table">
       <!--  -->
-      <tr v-for="product in productList" :key="product.id">
+      <tr
+        v-for="product in productList"
+        :key="product.id"
+        class="clickable"
+        @click="handleRowClick(product.id)"
+      >
         <td>{{ product.id }}</td>
         <td>{{ product.name }}</td>
-        <td>{{ product.brandName }}</td>
+        <td>{{ product.brand.name }}</td>
         <td>{{ product.description }}</td>
         <td>{{ product.apply }}</td>
         <td>{{ product.price }}</td>
+        <td>{{ product.tags.map(it=>it.name).join('; ') }}</td>
         <!-- <td>{{ product.url }}</td> -->
         <td>
           <span
@@ -35,17 +42,12 @@
 </template>
 
 <script>
-
 export default {
-  components: {
-  },
+  components: {},
   props: {
     productList: Array
   },
   methods: {
-    handleRowClick(productId) {
-      this.$router.push({ name: 'admin__product.info', params: { productId } });
-    },
     editProduct(productId) {
       this.productId = productId;
       this.showModal = true;
@@ -53,6 +55,12 @@ export default {
     updateProductData(id) {
       this.$emit('updateProduct', id);
       this.showModal = false;
+    },
+    handleRowClick(id) {
+      this.$router.push({
+        name: 'admin__product.edit',
+        params: { productId: id }
+      });
     }
   },
   data() {

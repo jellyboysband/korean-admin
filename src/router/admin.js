@@ -19,6 +19,16 @@ const ADMIN_ROUTES = [
         path: 'product/create',
         component: () => import('../views/Product/ProductCreate')
       },
+      {
+        name: 'admin__product.edit',
+        path: 'product/:productId/edit',
+        props: route => {
+          return {
+            productId: Number(route.params.productId)
+          };
+        },
+        component: () => import('../views/Product/ProductEdit')
+      },
 
       //= == ingredient SECTION ===
       {

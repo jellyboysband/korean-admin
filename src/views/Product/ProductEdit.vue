@@ -106,9 +106,12 @@
                 dropzone
                 v-model="advancedGallery"
               />
-              <label class="control-label black-label" for="image">{{ $t('product.image') }}</label>
+              <label class="control-label black-label" for="image">{{ $t('product.newImage') }}</label>
               <i class="bar"></i>
             </div>
+          </div>
+          <div class="flex xs6">
+            <img :src="fields.avatarUrl" />
           </div>
         </div>
         <div class="flex xs12">
@@ -130,6 +133,7 @@ import BrandService from 'services/network/BrandService.js';
 import TagService from 'services/network/TagService.js';
 
 export default {
+  props: ['productId'],
   computed: {
     isReadyToSubmit() {
       const uuuu = Object.keys(this.fields).find(
@@ -139,11 +143,23 @@ export default {
     }
   },
   mounted() {
-    BrandService.getBrandList().then(response => {
-      this.selectOptions.brands = response.list;
-    });
-    TagService.getTagList().then(response => {
-      this.selectOptions.tags = response.list;
+    Promise.all([
+      BrandService.getBrandList().then(response => {
+        this.selectOptions.brands = response.list;
+      }),
+      TagService.getTagList().then(response => {
+        this.selectOptions.tags = response.list;
+      })
+    ]).then(_ => {
+      ProductService.getProductById(this.productId).then(response => {
+        this.fields.name = response.name;
+        this.fields.description = response.description;
+        this.fields.apply = response.apply;
+        this.fields.price = response.price;
+        this.fields.brand = response.brand;
+        this.fields.tags = response.tags;
+        this.fields.avatarUrl = response.avatarUrl;
+      });
     });
   },
   methods: {
@@ -199,7 +215,8 @@ export default {
         apply: null,
         price: null,
         brand: null,
-        tags: []
+        tags: [],
+        avatarUrl: null
       },
       selectOptions: {
         brands: [],
