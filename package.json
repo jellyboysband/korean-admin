@@ -8,9 +8,11 @@
     "serve:operator": "vue-cli-service serve src/operator/index.js --port 8081",
     "build:admin": "vue-cli-service build --dest dist/admin src/admin/index.js",
     "build:operator": "vue-cli-service build --dest dist/operator src/operator/index.js",
-    "build": "npm run build:admin",
     "lint": "vue-cli-service lint",
-    "inspect": "vue-cli-service inspect > inspect.js"
+    "build": "NODE_ENV=production vue-cli-service build --dest dist/admin src/admin/index.js",
+    "backup": "ssh -o ServerAliveInterval=60 exorcist@35.228.184.126  'rm -rf /home/korean-all/www/korean-admin_old/* && cp -r -f /home/korean-all/www/korean-admin/* /home/korean-all/www/korean-admin_old/'",
+    "rmOld": "ssh -o ServerAliveInterval=60 exorcist@35.228.184.126  'rm -rf /home/korean-all/www/korean-admin/*'",
+    "deploy": "npm run build && npm run backup && npm run rmOld && rsync -rvz dist/admin/ exorcist@35.228.184.126:/home/korean-all/www/korean-admin"
   },
   "repository": {
     "type": "git",
