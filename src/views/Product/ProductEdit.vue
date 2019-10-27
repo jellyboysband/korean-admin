@@ -187,7 +187,7 @@ export default {
       });
     },
     submitProduct() {
-      ProductService.createProduct({
+      ProductService.editProduct(this.productId, {
         name: this.fields.name,
         description: this.fields.description,
         apply: this.fields.apply,
@@ -202,7 +202,16 @@ export default {
         this.$toasted.global.global_success({
           message: 'Product was created!'
         });
-        this.$router.push({ name: 'admin__products' });
+
+        ProductService.getProductById(this.productId).then(response => {
+          this.fields.name = response.name;
+          this.fields.description = response.description;
+          this.fields.apply = response.apply;
+          this.fields.price = response.price;
+          this.fields.brand = response.brand;
+          this.fields.tags = response.tags;
+          this.fields.avatarUrl = response.avatarUrl;
+        });
       });
     }
   },

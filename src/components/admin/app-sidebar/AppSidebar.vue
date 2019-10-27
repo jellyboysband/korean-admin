@@ -13,6 +13,12 @@
           <span>{{ $t('menu.products') }}</span>
         </span>
       </sidebar-link>
+      <sidebar-link :to="{ name: 'admin__orders' }">
+        <span slot="title">
+          <!-- <span class="sidebar-menu-item-icon fontello fontello-slots"></span> -->
+          <span>{{ $t('menu.orders') }}</span>
+        </span>
+      </sidebar-link>
     </template>
   </vuestic-sidebar>
 </template>

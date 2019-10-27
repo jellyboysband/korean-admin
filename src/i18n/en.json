@@ -15,7 +15,8 @@
   "menu": {
     "brands": "Brands",
     "products": "Products",
-    "confirm": "Are you sure you want to remove brand"
+    "confirm": "Are you sure you want to remove brand",
+    "orders": "Orders"
   },
   "brand": {
     "brands": "Brands",
@@ -36,7 +37,35 @@
     "description": "Description",
     "apply": "Apply",
     "price": "Price",
-    "image": "Image"
+    "image": "Image",
+    "tags": "Tags",
+    "tag": "Tag",
+    "newImage": "New Image"
+  },
+  "order": {
+    "orders": "Orders",
+    "products": "Products",
+    "edit": "Edit product",
+    "empty": "There is no orders!",
+    "phone": "Phone",
+    "REJECTED": "Rejected",
+    "RESOLVED": "Resolved",
+    "WAITING": "Waiting",
+    "PROGRESS": "Progress",
+    "product": "Product",
+    "count": "Count",
+    "cost": "cost",
+    "createdAt": "Created at",
+    "addProduct": "Add product",
+    "resultCost": "Result cost",
+    "status": "Status",
+    "price": "Price",
+    "image": "Image",
+    "reject": "Rejecte",
+    "resolve": "Resolve"
+  },
+  "button": {
+    "submit": "Submit"
   },
   "submit": "Submit",
   "create": "Create",

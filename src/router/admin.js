@@ -30,6 +30,23 @@ const ADMIN_ROUTES = [
         component: () => import('../views/Product/ProductEdit')
       },
 
+      {
+        name: 'admin__orders',
+        path: 'order/list',
+        component: () => import('../views/Order/Orders'),
+        props: true
+      },
+      {
+        name: 'admin__order.edit',
+        path: 'order/:orderId/edit',
+        props: route => {
+          return {
+            orderId: Number(route.params.orderId)
+          };
+        },
+        component: () => import('../views/Order/OrderEdit')
+      },
+
       //= == ingredient SECTION ===
       {
         name: 'admin__brands',
