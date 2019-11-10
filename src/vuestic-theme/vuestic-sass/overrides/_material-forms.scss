@@ -146,6 +146,7 @@ fieldset {
     input.has-value,
     textarea:focus,
     textarea:valid,
+    textarea:disabled,
     textarea.form-file,
     textarea.has-value {
       color: $mf-input-color;
@@ -281,6 +282,7 @@ fieldset {
   input.has-value,
   textarea:focus,
   textarea:valid,
+  textarea:disabled,
   textarea.form-file,
   textarea.has-value {
     color: $mf-input-color;

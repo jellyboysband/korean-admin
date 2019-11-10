@@ -25,7 +25,7 @@
         <td>{{ product.brand.name }}</td>
         <td>{{ product.description }}</td>
         <td>{{ product.apply }}</td>
-        <td>{{ product.price }}</td>
+        <td>{{ product.priceRange }}</td>
         <td>{{ product.tags.map(it=>it.name).join('; ') }}</td>
         <!-- <td>{{ product.url }}</td> -->
         <td>

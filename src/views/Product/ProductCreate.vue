@@ -10,7 +10,7 @@
           <!--  TITLE -->
           <div class="form-group">
             <div class="input-group">
-              <input
+              <textarea-autosize
                 id="productName"
                 type="text"
                 v-model="fields.name"
@@ -23,7 +23,7 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <input
+              <textarea-autosize
                 id="productDescription"
                 type="text"
                 v-model="fields.description"
@@ -36,7 +36,7 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <input
+              <textarea-autosize
                 id="productApply"
                 type="text"
                 v-model="fields.apply"
@@ -47,21 +47,8 @@
               <i class="bar"></i>
             </div>
           </div>
-          <div class="form-group">
-            <div class="input-group">
-              <input
-                id="productPrice"
-                type="number"
-                v-model.number="fields.price"
-                required
-                data-qa="products-price"
-              />
-              <label class="control-label" for="productPrice">{{ $t('product.price') }}</label>
-              <i class="bar"></i>
-            </div>
-          </div>
 
-          <div class="form-group" v-if="selectOptions.brands.length">
+          <div class="form-group">
             <div class="input-group">
               <v-select
                 label="name"
@@ -77,7 +64,7 @@
               />
             </div>
           </div>
-          <div class="form-group" v-if="selectOptions.tags.length">
+          <div class="form-group">
             <div class="input-group">
               <v-select
                 label="name"
@@ -93,6 +80,59 @@
                 @option:created="createTag"
               />
             </div>
+          </div>
+
+          <div class="form-group" v-for="(extra,i) of fields.extras" :key="i">
+            <div class="input-group">
+              <input
+                :id="`product-price${i}`"
+                type="number"
+                v-model.number="extra.price"
+                required
+                :data-qa="`products-price${i}`"
+              />
+              <label class="control-label" :for="`product-price${i}`">{{ $t('product.price') }}</label>
+              <i class="bar"></i>
+            </div>
+
+            <div class="input-group">
+              <input
+                :id="`product-volume${i}`"
+                type="number"
+                v-model.number="extra.volume"
+                required
+                :data-qa="`products-volume${i}`"
+              />
+              <label class="control-label" :for="`product-volume${i}`">{{ $t('product.volume') }}</label>
+              <i class="bar"></i>
+            </div>
+            <div class="input-group">
+              <input
+                :id="`product-weight${i}`"
+                type="number"
+                v-model.number="extra.weight"
+                required
+                :data-qa="`products-weight${i}`"
+              />
+              <label class="control-label" :for="`product-weight${i}`">{{ $t('product.weight') }}</label>
+              <i class="bar"></i>
+            </div>
+
+            <div class="input-group">
+              <button
+                class="btn btn-danger"
+                :disabled="fields.extras.length<=1"
+                type="button"
+                @click="fields.extras.splice(i,1)"
+              >{{ $t('button.deleteOption') }}</button>
+            </div>
+          </div>
+          <div class="input-group">
+            <button
+              class="btn btn-primary"
+              type="button"
+              @click="fields.extras.push({price:0,weight:0,volume:0})"
+            >{{ $t('button.addOption') }}</button>
           </div>
         </fieldset>
 
@@ -132,10 +172,10 @@ import TagService from 'services/network/TagService.js';
 export default {
   computed: {
     isReadyToSubmit() {
-      const uuuu = Object.keys(this.fields).find(
+      const notReady = Object.keys(this.fields).find(
         key => this.fields[key] === null
       );
-      return !uuuu;
+      return !notReady;
     }
   },
   mounted() {
@@ -175,7 +215,7 @@ export default {
         name: this.fields.name,
         description: this.fields.description,
         apply: this.fields.apply,
-        price: this.fields.price,
+        extras: this.fields.extras,
         brandId: this.fields.brand.id,
 
         photo: this.advancedGallery.length
@@ -197,9 +237,9 @@ export default {
         name: null,
         description: null,
         apply: null,
-        price: null,
         brand: null,
-        tags: []
+        tags: [],
+        extras: [{ price: 0, weight: 0, volume: 0 }]
       },
       selectOptions: {
         brands: [],

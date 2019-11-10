@@ -27,7 +27,27 @@ class ProductService {
     return axios.get(`${window.env.API_URL}/api/admin/products/${id}`).then(response => response.data);
   }
   static deleteProduct(id) {
-    return axios.delete(`${window.env.API_URL}/api/admin/products`, { params: { id } }).then(response => response.data);
+    return axios.delete(`${window.env.API_URL}/api/admin/products/${id}`).then(response => response.data);
+  }
+
+  static createExtra(data) {
+    return axios.post(`${window.env.API_URL}/api/admin/productExtras`, data).then(response => {
+      return response.data;
+    });
+  }
+  static editExtra(id, data) {
+    return axios.put(`${window.env.API_URL}/api/admin/productExtras/${id}`, data).then(response => {
+      return response.data;
+    });
+  }
+  static getExtraList({ limit = 1000, offset = 0, order = '-id', ...params }) {
+    return axios.get(`${window.env.API_URL}/api/admin/productExtras`, { params: { limit, offset, order, ...params } }).then(response => response.data);
+  }
+  static getExtraById(id) {
+    return axios.get(`${window.env.API_URL}/api/admin/productExtras/${id}`).then(response => response.data);
+  }
+  static deleteExtra(id) {
+    return axios.delete(`${window.env.API_URL}/api/admin/productExtras/${id}`).then(response => response.data);
   }
 }
 

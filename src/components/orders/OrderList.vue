@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     getOrders() {
-      OrderService.getOrderList({}).then(response => {
+      OrderService.getOrderList(this.filter).then(response => {
         this.orderList = response.list;
       });
     },

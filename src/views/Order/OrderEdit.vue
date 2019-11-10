@@ -1,5 +1,5 @@
 <template>
-  <div class="flex xs12">
+  <div class="flex xs12" v-if="selectOptions.products.length">
     <vuestic-widget :headerText="$t('order.edit')">
       <form
         autocomplete="off"
@@ -50,14 +50,15 @@
               />
             </div>
           </div>
-
           <div v-for="(product,i) of fields.resolvedProducts" :key="i">
-            <div class="form-group" v-if="selectOptions.products.length">
+            <div class="form-group">
               <div class="input-group">
-                <input
+                <textarea-autosize
                   id="Product"
                   type="text"
-                  v-bind:value="selectOptions.products.find(it=>product.productId===it.id).name"
+                  v-bind:value="selectOptions.products.find(it=>product.extraId===it.id) ?
+                  (selectOptions.products.find(it=>product.extraId===it.id).product.name +'\n'+selectOptions.products.find(it=>product.extraId===it.id).volume + ' мл.'+'\n'+selectOptions.products.find(it=>product.extraId===it.id).weight + ' гр.' ):
+                  (products.find(it=>product.extraId===it.id).product.name+'\n'+products.find(it=>product.extraId===it.id).volume + ' мл.'+'\n'+products.find(it=>product.extraId===it.id).weight + ' гр.')"
                   :data-qa="`orders-product${i}`"
                   disabled
                 />
@@ -92,14 +93,13 @@
               >X</button>
             </div>
           </div>
-
-          <div class="form-group">
+          <!-- <div class="form-group">
             <div class="input-group">
               <v-select
-                label="name"
+                label="product.name"
                 :data-label="$t('order.products')"
                 :class="'selected'"
-                :options="selectOptions.products.filter(it=>!fields.resolvedProducts.map(p=>p.productId).includes(it.id))"
+                :options="selectOptions.products.filter(it=>!fields.resolvedProducts.map(p=>p.extraId).includes(it.id)) "
                 v-model="selectedProduct"
                 :clearable="false"
                 required
@@ -112,6 +112,7 @@
               @click="addProduct(selectedProduct)"
             >{{$t('orders.addProduct')}}</button>
           </div>
+          -->
           <button type="submit" class="btn btn-primary">{{$t('button.submit')}}</button>
         </fieldset>
       </form>
@@ -132,18 +133,23 @@ export default {
     }
   },
   mounted() {
-    ProductService.getProductList({}).then(response => {
+    ProductService.getExtraList({}).then(response => {
       this.selectOptions.products = response.list;
+      response.list.forEach(it => {
+        it.name = `${it.volume} мл. ${it.weight} гр. ${it.price} р. ${it.product.name}`;
+      });
     });
     OrderService.getOrderById(this.orderId).then(response => {
       this.order = response;
       this.fields.status = this.selectOptions.statuses.find(
         it => it.value === response.status
       );
+      this.products = response.data.map(it => it.product);
       this.fields.resolvedProducts = response.data.map(it => {
         return {
           productId: it.product.id,
           price: it.product.price,
+          extraId: it.product.extraId,
           count: it.count
         };
       });
@@ -180,6 +186,7 @@ export default {
         resolvedProducts: []
       },
       order: null,
+      products: [],
       selectedProduct: [],
       selectOptions: {
         products: [],

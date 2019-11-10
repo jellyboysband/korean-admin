@@ -10,7 +10,7 @@
           <!--  TITLE -->
           <div class="form-group">
             <div class="input-group">
-              <input
+              <textarea-autosize
                 id="productName"
                 type="text"
                 v-model="fields.name"
@@ -23,7 +23,7 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <input
+              <textarea-autosize
                 id="productDescription"
                 type="text"
                 v-model="fields.description"
@@ -36,7 +36,7 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <input
+              <textarea-autosize
                 id="productApply"
                 type="text"
                 v-model="fields.apply"
@@ -47,21 +47,8 @@
               <i class="bar"></i>
             </div>
           </div>
-          <div class="form-group">
-            <div class="input-group">
-              <input
-                id="productPrice"
-                type="number"
-                v-model.number="fields.price"
-                required
-                data-qa="products-price"
-              />
-              <label class="control-label" for="productPrice">{{ $t('product.price') }}</label>
-              <i class="bar"></i>
-            </div>
-          </div>
 
-          <div class="form-group" v-if="selectOptions.brands.length">
+          <div class="form-group">
             <div class="input-group">
               <v-select
                 label="name"
@@ -77,7 +64,7 @@
               />
             </div>
           </div>
-          <div class="form-group" v-if="selectOptions.tags.length">
+          <div class="form-group">
             <div class="input-group">
               <v-select
                 label="name"
@@ -93,6 +80,59 @@
                 @option:created="createTag"
               />
             </div>
+          </div>
+
+          <div class="form-group" v-for="(extra,i) of fields.extras" :key="i">
+            <div class="input-group">
+              <input
+                :id="`product-price${i}`"
+                type="number"
+                v-model.number="extra.price"
+                required
+                :data-qa="`products-price${i}`"
+              />
+              <label class="control-label" :for="`product-price${i}`">{{ $t('product.price') }}</label>
+              <i class="bar"></i>
+            </div>
+
+            <div class="input-group">
+              <input
+                :id="`product-volume${i}`"
+                type="number"
+                v-model.number="extra.volume"
+                required
+                :data-qa="`products-volume${i}`"
+              />
+              <label class="control-label" :for="`product-volume${i}`">{{ $t('product.volume') }}</label>
+              <i class="bar"></i>
+            </div>
+            <div class="input-group">
+              <input
+                :id="`product-weight${i}`"
+                type="number"
+                v-model.number="extra.weight"
+                required
+                :data-qa="`products-weight${i}`"
+              />
+              <label class="control-label" :for="`product-weight${i}`">{{ $t('product.weight') }}</label>
+              <i class="bar"></i>
+            </div>
+
+            <div class="input-group">
+              <button
+                class="btn btn-danger"
+                :disabled="fields.extras.length <=1"
+                type="button"
+                @click="deleteExtra(i)"
+              >{{ $t('button.deleteOption') }}</button>
+            </div>
+          </div>
+          <div class="input-group">
+            <button
+              class="btn btn-primary"
+              type="button"
+              @click="createExtra"
+            >{{ $t('button.addOption') }}</button>
           </div>
         </fieldset>
 
@@ -155,14 +195,35 @@ export default {
         this.fields.name = response.name;
         this.fields.description = response.description;
         this.fields.apply = response.apply;
-        this.fields.price = response.price;
+        this.fields.extras = response.extras;
         this.fields.brand = response.brand;
         this.fields.tags = response.tags;
-        this.fields.avatarUrl = response.avatarUrl;
+        this.fields.avatarUrl = response.avatarUrl || '';
       });
     });
   },
   methods: {
+    createExtra() {
+      ProductService.createExtra({
+        price: 0,
+        weight: 0,
+        volume: 0,
+        productId: this.productId
+      }).then(response => {
+        this.fields.extras.push({
+          id: response.id,
+          price: 0,
+          weight: 0,
+          volume: 0,
+          productId: this.productId
+        });
+      });
+    },
+    deleteExtra(i) {
+      ProductService.deleteExtra(this.fields.extras[i].id).then(_ => {
+        this.fields.extras.splice(i, 1);
+      });
+    },
     createBrand(e) {
       const name = typeof e === 'string' ? e : e.name;
       BrandService.createBrand({ name }).then(brand => {
@@ -187,30 +248,42 @@ export default {
       });
     },
     submitProduct() {
-      ProductService.editProduct(this.productId, {
-        name: this.fields.name,
-        description: this.fields.description,
-        apply: this.fields.apply,
-        price: this.fields.price,
-        brandId: this.fields.brand.id,
+      const extras = [];
+      for (const extra of this.fields.extras) {
+        extras.push(
+          ProductService.editExtra(extra.id, {
+            price: extra.price,
+            weight: extra.weight,
+            volume: extra.volume
+          })
+        );
+      }
+      Promise.all(extras).then(() => {
+        ProductService.editProduct(this.productId, {
+          name: this.fields.name,
+          description: this.fields.description,
+          apply: this.fields.apply,
+          price: this.fields.price,
+          brandId: this.fields.brand.id,
 
-        photo: this.advancedGallery.length
-          ? this.advancedGallery[this.advancedGallery.length - 1]
-          : null,
-        tags: this.fields.tags.map(it => it.id)
-      }).then(response => {
-        this.$toasted.global.global_success({
-          message: 'Product was created!'
-        });
+          photo: this.advancedGallery.length
+            ? this.advancedGallery[this.advancedGallery.length - 1]
+            : null,
+          tags: this.fields.tags.map(it => it.id)
+        }).then(response => {
+          this.$toasted.global.global_success({
+            message: 'Product was created!'
+          });
 
-        ProductService.getProductById(this.productId).then(response => {
-          this.fields.name = response.name;
-          this.fields.description = response.description;
-          this.fields.apply = response.apply;
-          this.fields.price = response.price;
-          this.fields.brand = response.brand;
-          this.fields.tags = response.tags;
-          this.fields.avatarUrl = response.avatarUrl;
+          ProductService.getProductById(this.productId).then(response => {
+            this.fields.name = response.name;
+            this.fields.description = response.description;
+            this.fields.apply = response.apply;
+            this.fields.price = response.price;
+            this.fields.brand = response.brand;
+            this.fields.tags = response.tags;
+            this.fields.avatarUrl = response.avatarUrl;
+          });
         });
       });
     }
@@ -222,10 +295,10 @@ export default {
         name: null,
         description: null,
         apply: null,
-        price: null,
+        extras: [],
         brand: null,
         tags: [],
-        avatarUrl: null
+        avatarUrl: ''
       },
       selectOptions: {
         brands: [],

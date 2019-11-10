@@ -28,6 +28,31 @@ export default {
     getProducts() {
       ProductService.getProductList({}).then(response => {
         this.productList = response.list;
+        response.list.forEach(element => {
+          let priceMin = element.extras.length ? element.extras[0].price : null;
+          let priceMax = element.extras.length ? element.extras[0].price : null;
+          for (const product of element.extras) {
+            if (product.price < priceMin) {
+              priceMin = product.price;
+            }
+            if (product.price > priceMax) {
+              priceMax = product.price;
+            }
+          }
+          if (priceMin !== null && priceMax !== null) {
+            if (priceMin !== priceMax) {
+              element.priceRange = `${priceMin}-${priceMax}`;
+            } else {
+              element.priceRange = `${priceMin}`;
+            }
+          } else {
+            if (priceMax !== null) {
+              element.priceRange = `${priceMax}`;
+            } else if (priceMin !== null) {
+              element.priceRange = `${priceMin}`;
+            }
+          }
+        });
       });
     },
 

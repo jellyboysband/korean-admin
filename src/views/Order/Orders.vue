@@ -2,13 +2,7 @@
   <div class="va-row">
     <div class="flex xs12">
       <vuestic-widget :headerText="$t('order.orders')">
-        <template v-order:header-content>
-          <router-link
-            :to="{name:'admin__order.create'}"
-            class="btn btn-micro btn-primary"
-            :data-qa="`widgetButton-Create`"
-          >{{$t('create')}}</router-link>
-        </template>
+        <template v-order:header-content></template>
         <!-- <order-filters :startFilter="this.filter" @change="handleFilterChange"></order-filters> -->
         <order-list :filter="this.filter"></order-list>
       </vuestic-widget>
@@ -23,7 +17,7 @@ import OrderList from 'components/orders/OrderList';
 export default {
   props: [],
   components: {
-    OrderList,
+    OrderList
     // OrderFilters
   },
   methods: {
@@ -34,13 +28,7 @@ export default {
   data() {
     return {
       filter: {
-        // hallId: this.hallId || null,
-        // vgm: null,
-        // limit: null,
-        // offset: null,
-        // title: null,
-        // order: '-id',
-        // deleted: false
+        order: '-createdAt'
       }
     };
   }
