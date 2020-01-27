@@ -84,6 +84,9 @@
 
           <div class="form-group" v-for="(extra,i) of fields.extras" :key="i">
             <div class="input-group">
+              <img style="height: auto; max-width: 100%;" :src="extra.avatarUrl" />
+            </div>
+            <div class="input-group">
               <input
                 :id="`product-price${i}`"
                 type="number"
@@ -117,6 +120,17 @@
               <label class="control-label" :for="`product-weight${i}`">{{ $t('product.weight') }}</label>
               <i class="bar"></i>
             </div>
+            <div class="input-group">
+              <vuestic-file-upload
+                id="image"
+                type="image"
+                :file-types="'.png, .jpg, .jpeg'"
+                dropzone
+                v-model="extra.photo"
+              />
+              <label class="control-label black-label" for="image">{{ $t('product.newImage') }}</label>
+              <i class="bar"></i>
+            </div>
 
             <div class="input-group">
               <button
@@ -136,24 +150,7 @@
           </div>
         </fieldset>
 
-        <div class="flex xs6">
-          <div class="form-group">
-            <div class="input-group">
-              <vuestic-file-upload
-                id="image"
-                type="image"
-                :file-types="'.png, .jpg, .jpeg'"
-                dropzone
-                v-model="advancedGallery"
-              />
-              <label class="control-label black-label" for="image">{{ $t('product.newImage') }}</label>
-              <i class="bar"></i>
-            </div>
-          </div>
-          <div class="flex xs6">
-            <img :src="fields.avatarUrl" />
-          </div>
-        </div>
+        <div class="flex xs6"></div>
         <div class="flex xs12">
           <button
             class="btn btn-primary"
@@ -198,7 +195,6 @@ export default {
         this.fields.extras = response.extras;
         this.fields.brand = response.brand;
         this.fields.tags = response.tags;
-        this.fields.avatarUrl = response.avatarUrl || '';
       });
     });
   },
@@ -254,7 +250,8 @@ export default {
           ProductService.editExtra(extra.id, {
             price: extra.price,
             weight: extra.weight,
-            volume: extra.volume
+            volume: extra.volume,
+            photo: extra.photo
           })
         );
       }
@@ -266,9 +263,6 @@ export default {
           price: this.fields.price,
           brandId: this.fields.brand.id,
 
-          photo: this.advancedGallery.length
-            ? this.advancedGallery[this.advancedGallery.length - 1]
-            : null,
           tags: this.fields.tags.map(it => it.id)
         }).then(response => {
           this.$toasted.global.global_success({
@@ -282,7 +276,7 @@ export default {
             this.fields.price = response.price;
             this.fields.brand = response.brand;
             this.fields.tags = response.tags;
-            this.fields.avatarUrl = response.avatarUrl;
+            this.fields.extras = response.extras;
           });
         });
       });
@@ -297,8 +291,7 @@ export default {
         apply: null,
         extras: [],
         brand: null,
-        tags: [],
-        avatarUrl: ''
+        tags: []
       },
       selectOptions: {
         brands: [],

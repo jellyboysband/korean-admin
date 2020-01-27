@@ -2,24 +2,31 @@ import axios from 'axios';
 
 import UploadService from './UploadService';
 class ProductService {
-  static createProduct({ photo, ...data }) {
+  static createProduct({ extras, ...data }) {
     return axios.post(`${window.env.API_URL}/api/admin/products`, data).then(response => {
-      if (photo) {
-        return UploadService.send(response.data.id, { file: photo }).then(it => response.data);
-      } else {
-        return response.data;
+      const tasks = [];
+      for (const extra of extras) {
+        tasks.push(axios.post(`${window.env.API_URL}/api/admin/productExtras`, { ...extra, productId: response.data.id }).then(it => {
+          if (extra.photo) {
+            return UploadService.send(it.data.id, { file: extra.photo[extra.photo.length - 1] }).then(it => it.data);
+          } else {
+            return it.data;
+          }
+        }));
       }
+      return Promise.all(tasks).then(_ => response.data);
     });
   }
-  static editProduct(id, { photo, ...data }) {
+  static editProduct(id, data) {
     return axios.put(`${window.env.API_URL}/api/admin/products/${id}`, data).then(response => {
-      if (photo) {
-        return UploadService.send(response.data.id, { file: photo }).then(it => response.data);
-      } else {
-        return response.data;
-      }
+
     });
   }
+
+  static uploadPhoto(id, photo) {
+    return UploadService.send(id, { file: photo }).then(response => response.data);
+  }
+
   static getProductList({ limit = 1000, offset = 0, order = '-id', ...params }) {
     return axios.get(`${window.env.API_URL}/api/admin/products`, { params: { limit, offset, order, ...params } }).then(response => response.data);
   }
@@ -35,9 +42,13 @@ class ProductService {
       return response.data;
     });
   }
-  static editExtra(id, data) {
+  static editExtra(id, { photo, ...data }) {
     return axios.put(`${window.env.API_URL}/api/admin/productExtras/${id}`, data).then(response => {
-      return response.data;
+      if (photo) {
+        return UploadService.send(id, { file: photo[photo.length - 1] }).then(it => response.data);
+      } else {
+        return response.data;
+      }
     });
   }
   static getExtraList({ limit = 1000, offset = 0, order = '-id', ...params }) {

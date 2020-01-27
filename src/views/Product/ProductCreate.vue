@@ -119,6 +119,17 @@
             </div>
 
             <div class="input-group">
+              <vuestic-file-upload
+                id="image"
+                type="image"
+                :file-types="'.png, .jpg, .jpeg'"
+                dropzone
+                v-model="extra.photo"
+              />
+              <label class="control-label black-label" for="image">{{ $t('product.image') }}</label>
+              <i class="bar"></i>
+            </div>
+            <div class="input-group">
               <button
                 class="btn btn-danger"
                 :disabled="fields.extras.length<=1"
@@ -131,26 +142,12 @@
             <button
               class="btn btn-primary"
               type="button"
-              @click="fields.extras.push({price:0,weight:0,volume:0})"
+              @click="fields.extras.push({price:0,weight:0,volume:0,photo:[]})"
             >{{ $t('button.addOption') }}</button>
           </div>
         </fieldset>
 
-        <div class="flex xs6">
-          <div class="form-group">
-            <div class="input-group">
-              <vuestic-file-upload
-                id="image"
-                type="image"
-                :file-types="'.png, .jpg, .jpeg'"
-                dropzone
-                v-model="advancedGallery"
-              />
-              <label class="control-label black-label" for="image">{{ $t('product.image') }}</label>
-              <i class="bar"></i>
-            </div>
-          </div>
-        </div>
+        <div class="flex xs6"></div>
         <div class="flex xs12">
           <button
             class="btn btn-primary"
@@ -218,9 +215,6 @@ export default {
         extras: this.fields.extras,
         brandId: this.fields.brand.id,
 
-        photo: this.advancedGallery.length
-          ? this.advancedGallery[this.advancedGallery.length - 1]
-          : null,
         tags: this.fields.tags.map(it => it.id)
       }).then(response => {
         this.$toasted.global.global_success({
@@ -232,14 +226,13 @@ export default {
   },
   data() {
     return {
-      advancedGallery: [],
       fields: {
         name: null,
         description: null,
         apply: null,
         brand: null,
         tags: [],
-        extras: [{ price: 0, weight: 0, volume: 0 }]
+        extras: [{ price: 0, weight: 0, volume: 0, photo: [] }]
       },
       selectOptions: {
         brands: [],
