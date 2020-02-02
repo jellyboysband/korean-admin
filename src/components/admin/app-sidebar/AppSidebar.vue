@@ -7,6 +7,12 @@
           <span>{{ $t('menu.brands') }}</span>
         </span>
       </sidebar-link>
+      <sidebar-link :to="{ name: 'admin__categories' }">
+        <span slot="title">
+          <!-- <span class="sidebar-menu-item-icon fontello fontello-vgms"></span> -->
+          <span>{{ $t('menu.categories') }}</span>
+        </span>
+      </sidebar-link>
       <sidebar-link :to="{ name: 'admin__products' }">
         <span slot="title">
           <!-- <span class="sidebar-menu-item-icon fontello fontello-slots"></span> -->

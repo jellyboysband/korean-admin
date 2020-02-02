@@ -58,6 +58,19 @@ const ADMIN_ROUTES = [
         name: 'admin__brand.create',
         path: 'brand/create',
         component: () => import('../views/Brand/BrandCreate')
+      },
+
+      //= == category SECTION ===
+      {
+        name: 'admin__categories',
+        path: 'category/list',
+        component: () => import('../views/Category/Categories'),
+        props: true
+      },
+      {
+        name: 'admin__category.create',
+        path: 'category/create',
+        component: () => import('../views/Category/CategoryCreate')
       }
     ]
   }

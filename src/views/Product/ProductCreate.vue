@@ -68,16 +68,16 @@
             <div class="input-group">
               <v-select
                 label="name"
-                :data-label=" $t('product.tag')"
-                :class="fields.tags.length ? 'selected' : ''"
-                :options="selectOptions.tags"
-                v-model="fields.tags"
+                :data-label=" $t('product.category')"
+                :class="fields.categories.length ? 'selected' : ''"
+                :options="selectOptions.categories"
+                v-model="fields.categories"
                 :clearable="false"
                 required
-                data-qa="product-tags"
+                data-qa="product-categories"
                 taggable
                 multiple
-                @option:created="createTag"
+                @option:created="createCategory"
               />
             </div>
           </div>
@@ -164,7 +164,7 @@
 import ProductService from 'services/network/ProductService.js';
 
 import BrandService from 'services/network/BrandService.js';
-import TagService from 'services/network/TagService.js';
+import CategoryService from 'services/network/CategoryService.js';
 
 export default {
   computed: {
@@ -179,8 +179,8 @@ export default {
     BrandService.getBrandList().then(response => {
       this.selectOptions.brands = response.list;
     });
-    TagService.getTagList().then(response => {
-      this.selectOptions.tags = response.list;
+    CategoryService.getCategoryList().then(response => {
+      this.selectOptions.categories = response.list;
     });
   },
   methods: {
@@ -195,14 +195,14 @@ export default {
         });
       });
     },
-    createTag(e) {
+    createCategory(e) {
       const name = typeof e === 'string' ? e : e.name;
-      TagService.createTag({ name }).then(tag => {
-        TagService.getTagList().then(response => {
-          this.selectOptions.tags = response.list;
-          this.fields.tags = [
-            ...this.fields.tags.slice(0, -1),
-            this.selectOptions.tags.find(it => it.id === tag.id)
+      CategoryService.createCategory({ name }).then(category => {
+        CategoryService.getCategoryList().then(response => {
+          this.selectOptions.categories = response.list;
+          this.fields.categories = [
+            ...this.fields.categories.slice(0, -1),
+            this.selectOptions.categories.find(it => it.id === category.id)
           ];
         });
       });
@@ -215,7 +215,7 @@ export default {
         extras: this.fields.extras,
         brandId: this.fields.brand.id,
 
-        tags: this.fields.tags.map(it => it.id)
+        categories: this.fields.categories.map(it => it.id)
       }).then(response => {
         this.$toasted.global.global_success({
           message: 'Product was created!'
@@ -231,12 +231,12 @@ export default {
         description: null,
         apply: null,
         brand: null,
-        tags: [],
+        categories: [],
         extras: [{ price: 0, weight: 0, volume: 0, photo: [] }]
       },
       selectOptions: {
         brands: [],
-        tags: []
+        categories: []
       }
     };
   }

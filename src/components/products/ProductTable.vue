@@ -8,7 +8,7 @@
         <th>{{ $t('product.description') }}</th>
         <th>{{ $t('product.apply') }}</th>
         <th>{{ $t('product.price') }}</th>
-        <th>{{ $t('product.tags') }}</th>
+        <th>{{ $t('product.categories') }}</th>
         <th>{{ $t('product.delete') }}?</th>
       </tr>
     </thead>
@@ -26,7 +26,7 @@
         <td>{{ product.description }}</td>
         <td>{{ product.apply }}</td>
         <td>{{ product.priceRange }}</td>
-        <td>{{ product.tags.map(it=>it.name).join('; ') }}</td>
+        <td>{{ product.categories.map(it=>it.name).join('; ') }}</td>
         <!-- <td>{{ product.url }}</td> -->
         <td>
           <span
