@@ -28,11 +28,12 @@
               label="name"
               :data-label=" $t('category.parent')"
               :class="category.parent ? 'selected' : ''"
-              :options="categoryList.filter(it=>it.id!==category.id)"
+              :options="getOptions(categoryList,category)"
               v-model="category.parent"
               :clearable="true"
               required
               data-qa="category-parent"
+              @change="changeParent(category,category.parent?category.parent.id:null)"
             />
           </td>
           <td>
@@ -113,6 +114,42 @@ export default {
     },
     cancel() {
       this.category = {};
+    },
+    changeParent(current, parentId) {
+      current.parentId = parentId;
+      this.updateCategory(current);
+    },
+    getOptions(list, current) {
+      const result = list.filter(
+        it => !this.isCycleWithFakeParent(current.id, it.id, list)
+      );
+      return result;
+    },
+    isCycleWithFakeParent(categoryId, fakeParentId, categories) {
+      categories = categories.map(it => {
+        return {
+          id: it.id,
+          parentId: it.parentId
+        };
+      });
+      const category = categories.find(it => it.id === categoryId);
+      category.parentId = fakeParentId;
+      const result = this.isCycle(category, categories);
+      return result;
+    },
+    isCycle(category, categories, ids = new Set()) {
+      if (!category.parentId) {
+        return false;
+      }
+      ids.add(category.id);
+      if (ids.has(category.parentId)) {
+        return true;
+      }
+      return this.isCycle(
+        categories.find(it => it.id === category.parentId),
+        categories,
+        ids
+      );
     }
   },
   data() {
