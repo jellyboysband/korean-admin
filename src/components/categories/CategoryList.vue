@@ -5,8 +5,8 @@
         <tr>
           <th>#</th>
           <th>{{ $t('category.name') }}</th>
+          <th></th>
           <th>{{ $t('category.parent') }}</th>
-          <th>{{ $t('category.submit') }}</th>
           <th>{{ $t('category.delete') }}?</th>
         </tr>
       </thead>
@@ -24,6 +24,13 @@
             </div>
           </td>
           <td>
+            <button
+              class="btn btn-micro btn-success"
+              type="button"
+              @click="updateCategory(category)"
+            >{{$t('category.submitName')}}</button>
+          </td>
+          <td>
             <v-select
               label="name"
               :data-label=" $t('category.parent')"
@@ -35,13 +42,6 @@
               data-qa="category-parent"
               @change="changeParent(category,category.parent?category.parent.id:null)"
             />
-          </td>
-          <td>
-            <button
-              class="btn btn-micro btn-success"
-              type="button"
-              @click="updateCategory(category)"
-            >{{$t('category.submit')}}</button>
           </td>
           <td>
             <span
@@ -65,13 +65,10 @@
 </template>
 
 <script>
-import CategoryTable from 'components/categories/CategoryTable';
 import CategoryService from 'services/network/CategoryService';
 
 export default {
-  components: {
-    CategoryTable
-  },
+  components: {},
   props: {
     filter: Object
   },

@@ -9,7 +9,7 @@
             :data-qa="`widgetButton-Create`"
           >{{$t('create')}}</router-link>
         </template>
-        <!-- <product-filters :startFilter="this.filter" @change="handleFilterChange"></product-filters> -->
+        <product-filters :startFilter="this.filter" @handleFilterChange="handleFilterChange"></product-filters>
         <product-list :filter="this.filter"></product-list>
       </vuestic-widget>
     </div>
@@ -18,29 +18,25 @@
 
 <script>
 import ProductList from 'components/products/ProductList';
-// import ProductFilters from 'components/products/ProductFilters';
+import ProductFilters from 'components/products/ProductFilter';
 
 export default {
   props: [],
   components: {
     ProductList,
-    // ProductFilters
+    ProductFilters
   },
   methods: {
     handleFilterChange(filter) {
-      this.filter = filter;
+      this.filter = JSON.parse(JSON.stringify(filter));
     }
   },
   data() {
     return {
       filter: {
-        // hallId: this.hallId || null,
-        // vgm: null,
-        // limit: null,
-        // offset: null,
-        // title: null,
-        // order: '-id',
-        // deleted: false
+        name: '',
+        categories: [],
+        brand: []
       }
     };
   }

@@ -1,6 +1,45 @@
 <template>
-  <div class="row justify-content-center" v-if="productList.length">
-    <product-table :productList="productList" @deleteOrRestore="deleteOrRestore"></product-table>
+  <div class="row justify-content-center" v-if="filteredProducts.length">
+    <table class="table table-striped first-td-padding table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>{{ $t('product.name') }}</th>
+          <th>{{ $t('product.brand') }}</th>
+          <th>{{ $t('product.description') }}</th>
+          <th>{{ $t('product.apply') }}</th>
+          <th>{{ $t('product.price') }}</th>
+          <th>{{ $t('product.categories') }}</th>
+          <th>{{ $t('product.delete') }}?</th>
+        </tr>
+      </thead>
+      <tbody data-qa="products-table">
+        <!--  -->
+        <tr
+          v-for="product in filteredProducts"
+          :key="product.id"
+          class="clickable"
+          @click="handleRowClick(product.id)"
+        >
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.brand.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.apply }}</td>
+          <td>{{ product.priceRange }}</td>
+          <td>{{ product.categories.map(it=>it.name).join('; ') }}</td>
+          <!-- <td>{{ product.url }}</td> -->
+          <td>
+            <span
+              aria-hidden="true"
+              class="entypo maki-trash trash"
+              style="color: #e34a4a"
+              @click.stop="deleteOrRestore(product)"
+            ></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <vuestic-modal ref="largeModal" :large="true" @ok="ok" @cancel="cancel">
       <p>Are you sure you want to remove product {{ product.name }}?</p>
     </vuestic-modal>
@@ -11,20 +50,55 @@
 </template>
 
 <script>
-import ProductTable from 'components/products/ProductTable';
 import ProductService from 'services/network/ProductService';
 
 export default {
-  components: {
-    ProductTable
-  },
+  components: {},
   props: {
     filter: Object
+  },
+
+  computed: {
+    filteredProducts() {
+      return this.productList.filter(product => {
+        const good = true;
+        if (this.filter.brand.length) {
+          if (!this.filter.brand.includes(product.brand.id)) {
+            return false;
+          }
+        }
+        if (this.filter.categories.length) {
+          if (
+            !product.categories.some(it =>
+              this.filter.categories.includes(it.id)
+            )
+          ) {
+            return false;
+          }
+        }
+        if (this.filter.name) {
+          if (
+            product.name
+              .toLowerCase()
+              .search(this.filter.name.toLowerCase()) === -1
+          ) {
+            return false;
+          }
+        }
+        return good;
+      });
+    }
   },
   mounted() {
     this.getProducts();
   },
   methods: {
+    handleRowClick(id) {
+      this.$router.push({
+        name: 'admin__product.edit',
+        params: { productId: id }
+      });
+    },
     getProducts() {
       ProductService.getProductList({}).then(response => {
         this.productList = response.list;
@@ -82,4 +156,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.trash {
+  font-size: 30px;
+}
+</style>
