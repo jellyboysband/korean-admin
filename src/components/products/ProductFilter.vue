@@ -72,8 +72,33 @@ export default {
         brand: (filter.brand || []).map(it => it.id),
         categories: (filter.categories || []).map(it => it.id)
       };
+      if (newFilter.categories.length) {
+        const parents = new Set(newFilter.categories);
+        for (const category of filter.categories) {
+          const catParents = this.getAllChilds(
+            category,
+            this.selectOptions.categories
+          );
+          for (const catId of catParents) {
+            parents.add(catId);
+          }
+        }
+        newFilter.categories = [...parents];
+      }
+      console.log('TCL: changeFilter -> newFilter', newFilter.categories);
+
       this.$emit('handleFilterChange', newFilter);
+    },
+
+    getAllChilds(category, categories, ids = new Set()) {
+      ids.add(category.id);
+      const child = categories.find(it => it.parentId === category.id);
+      if (!child || ids.has(child.id)) {
+        return [...ids];
+      }
+      return this.getAllChilds(child, categories, ids);
     }
+
     // changeBrand(brands) {},
     // changeCategories(categories) {}
   },

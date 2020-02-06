@@ -23,7 +23,15 @@
         <td>{{ $t(`order.${order.status}`)}}</td>
         <td>{{ order.phone }}</td>
         <td>{{ order.cost }}</td>
-        <td>{{ order.createdAt }}</td>
+        <td>
+          {{ new Date(order.createdAt).toLocaleString("ru", {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric'
+          })}}
+        </td>
         <td>
           <button
             type="button"
