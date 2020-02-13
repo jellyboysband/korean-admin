@@ -33,7 +33,6 @@
                       :options="categoryList"
                       v-model="fields.parent"
                       :clearable="true"
-                      required
                       data-qa="category-parent"
                     />
                   </div>
@@ -58,9 +57,10 @@ import CategoryService from 'services/network/CategoryService.js';
 export default {
   computed: {
     isReadyToSubmit() {
-      return !Object.keys(this.fields).find(
-        key => this.fields[key] === null || this.fields[key] === ''
-      );
+      return ![null, ''].includes(this.fields.name);
+      // return !Object.keys(this.fields).find(
+      //   key => this.fields[key] === null || this.fields[key] === ''
+      // );
     }
   },
   mounted() {
